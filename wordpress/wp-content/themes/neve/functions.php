@@ -137,3 +137,48 @@ function wpso_custom_links_admin_menu() {
 // }
 
 
+//////////////////////////////////////////*otp*//////////////////////////////////////////
+
+add_action( 'rest_api_init', 'register_api_hooks_otp' );
+
+function register_api_hooks_otp() {
+	register_rest_route(
+		'custom-plugin', '/otp/',
+		array(
+			'methods'  => 'POST',
+			'callback' => 'forgot_otp',
+		)
+	);
+}
+function forgot_otp($request){
+
+	$success = "";
+	$error_message = "";
+	$conn = mysqli_connect("localhost","root","","pharmacy");
+	
+	var_dump($_POST["user_email"]);
+
+
+	require('phpmailer/class.phpmailer.php');
+	require('phpmailer/class.smtp.php');
+
+	$message_body = "OPT code is:" . $otp;
+	$mail = new PHPMailer();
+	$mail->IsSMTP();
+	$mail->SMTPDebug = 0;
+	$mail->SMTPAuth = TRUE;
+	$mail->SMTPSecure = 'ssl'; // tls or ssl
+	$mail->Port     = 465;
+	$mail->Username = 'rajparadhyey12@gmail.com';                 // SMTP username
+	$mail->Password = '856734219';
+	$mail->Host     = "smtp.gmail.com";
+	$mail->Mailer   = "smtp";
+	$mail->SetFrom('dhyeyrajpara.rao@gmail.com');
+	$mail->AddAddress('dhyeyrajpara.rao@gmail.com');
+	$mail->Subject = "OTP to Login";
+	$mail->MsgHTML($message_body);
+	$mail->IsHTML(true);		
+	$result = $mail->Send();
+
+	return $result;
+}

@@ -6,6 +6,7 @@ if ( 'settings' == FrmAppHelper::simple_get( 'frm_action', 'sanitize_title' ) ) 
 }
 ?>
 			<button class="frm_submit_form button-primary frm-button-primary frm_button_submit <?php echo esc_attr( $class ); ?>" type="button" id="frm_submit_side_top" >
+				<!-- <?php //echo '<a href="http://localhost/wordpress/wp-json/custom-plugin/otp">'?> <?php// esc_html_e( 'Update', 'formidable' ); ?><?php //echo '</a>' ;?> -->
 				<?php esc_html_e( 'Update', 'formidable' ); ?>
 			</button>
 
